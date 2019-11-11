@@ -1,16 +1,23 @@
-function makeArrayConsecutive2(statues) {
+function almostIncreasingSequence(sequence) {
 
-  let max = Math.max(...statues)
-  let min = Math.min(...statues)
-  statues = statues.sort( (min, max) => min - max )
-  
-  let gaps = 0
-  for(let i=1; i<statues.length; i++){
-      let difference = statues[i]-statues[i-1]
-      if(difference-1 > 0) {
-          gaps += difference-1
-      }
+  let possibleIncreasingSequence = false
+  let newSequence
+  for(let i=0; i<sequence.length; i++){
+    newSequence = []
+    newSequence = sequence.filter( (element, index) => index != i ) 
+    let notSequential = true
+    for(let j=1; j<newSequence.length; j++){
+        if(newSequence[j-1] >= newSequence[j]) {
+            notSequential = false
+            break
+        }
+    }
+    
+    if(notSequential) {
+        possibleIncreasingSequence = true
+        break
+    }
   }
   
-  return gaps
+  return possibleIncreasingSequence
 }
